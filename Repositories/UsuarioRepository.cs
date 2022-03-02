@@ -49,7 +49,7 @@ namespace Chapter.WebApi.Repositories
         }
         public Usuario Login(string email, string senha)
         {
-            return _context.Usuarios.First(x => x.Email == email && x.Senha == senha);
+            return _context.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
 
         }
     }
