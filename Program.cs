@@ -1,4 +1,5 @@
 using Chapter.WebApi.Contexts;
+using Chapter.WebApi.Interfaces;
 using Chapter.WebApi.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -45,7 +46,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<ChapterContext, ChapterContext>();
 builder.Services.AddTransient<LivroRepository, LivroRepository>();
-builder.Services.AddTransient<UsuarioRepository, UsuarioRepository>();
+builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
 
 var app = builder.Build();

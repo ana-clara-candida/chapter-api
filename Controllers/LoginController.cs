@@ -1,4 +1,5 @@
-﻿using Chapter.WebApi.Models;
+﻿using Chapter.WebApi.Interfaces;
+using Chapter.WebApi.Models;
 using Chapter.WebApi.Repositories;
 using Chapter.WebApi.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -15,8 +16,8 @@ namespace Chapter.WebApi.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly UsuarioRepository _usuarioRepository;
-        public LoginController(UsuarioRepository usuarioRepository)
+        private readonly IUsuarioRepository _usuarioRepository;
+        public LoginController(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
@@ -28,7 +29,8 @@ namespace Chapter.WebApi.Controllers
                 Usuario usuarioBuscado = _usuarioRepository.Login(login.email, login.senha);
                 if (usuarioBuscado == null)
                 {
-                    return NotFound("E-mail e/ou senha inválidos");
+                    //return NotFound("E-mail e/ou senha inválidos");
+                    return Unauthorized(new {msg = "E-mail e/ou senha inválidos" });
                 }
                 var minhasClaims = new[]
                 {
